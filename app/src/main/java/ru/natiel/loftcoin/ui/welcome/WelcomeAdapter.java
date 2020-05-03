@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import ru.natiel.loftcoin.R;
 import ru.natiel.loftcoin.databinding.WelcomePageBinding;
 
-class WelcomePageAdapter extends RecyclerView.Adapter<WelcomePageAdapter.ViewHolder> {
+class WelcomeAdapter extends RecyclerView.Adapter<WelcomeAdapter.ViewHolder> {
 
     private static final WelcomePageModel[] MODELS = {
             new WelcomePageModel(   R.drawable.welcome_page_1,

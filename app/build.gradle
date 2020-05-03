@@ -10,6 +10,10 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "API_KEY", "\"${pApiKey}\""
+        buildConfigField "String", "API_ENDPOINT", "https://pro-api.coinmarketcap.com/v1"
+
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -44,6 +48,8 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta3"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.preference:preference:1.1.1"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
 
     //test
     androidTestImplementation "junit:junit:4.12"
@@ -55,6 +61,13 @@ dependencies {
     //lombok
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
-    implementation 'androidx.navigation:navigation-fragment:2.2.2'
-    implementation 'androidx.navigation:navigation-ui:2.2.2'
+
+    //navigation
+    implementation "androidx.fragment:fragment:1.2.4"
+    implementation "androidx.navigation:navigation-fragment:2.2.2"
+    implementation "androidx.navigation:navigation-ui:2.2.2"
+
+    //logging
+    implementation "com.jakewharton.timber:timber:4.7.1"
+
 }

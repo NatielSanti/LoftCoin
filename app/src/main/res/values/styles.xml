@@ -21,6 +21,23 @@
         <item name="textAppearanceTitle">@style/TextAppearance.AppTheme.H1.Title</item>
 
         <item name="buttonStyleGradient">@style/Widget.AppTheme.Button.Gradient</item>
+
+        <item name="walletCardBackground">@color/dark_five</item>
+        <item name="walletCardWidth">240dp</item>
+        <item name="walletCardHeight">160dp</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.AppTheme.BottomNav</item>
+
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="android:background">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <style name="Widget.AppTheme.BottomNav" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:background">?attr/colorPrimaryVariant</item>
     </style>
 
     <style name="TextAppearance.AppTheme" parent="TextAppearance.MaterialComponents.Body1" />
@@ -61,5 +78,8 @@
     <!-- Custom Attributes -->
     <attr name="textAppearanceTitle" format="reference" />
     <attr name="buttonStyleGradient" format="reference" />
+    <attr name="walletCardBackground" format="color|reference"/>
+    <attr name="walletCardWidth" format="dimension|reference"/>
+    <attr name="walletCardHeight" format="dimension|reference"/>
 
 </resources>

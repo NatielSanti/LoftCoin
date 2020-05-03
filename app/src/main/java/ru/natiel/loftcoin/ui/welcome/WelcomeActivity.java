@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +14,7 @@ import androidx.recyclerview.widget.SnapHelper;
 import ru.natiel.loftcoin.R;
 import ru.natiel.loftcoin.databinding.ActivityWelcomeBinding;
 import ru.natiel.loftcoin.ui.main.MainActivity;
+import ru.natiel.loftcoin.widget.CyrcleIndicator;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -31,7 +30,8 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.pager.setLayoutManager(
                 new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        binding.pager.setAdapter(new WelcomePageAdapter());
+        binding.pager.addItemDecoration(new CyrcleIndicator(this));
+        binding.pager.setAdapter(new WelcomeAdapter());
         helper = new PagerSnapHelper();
         helper.attachToRecyclerView(binding.pager);
         binding.btnStart.setOnClickListener((v) -> {

@@ -3,4 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8" />
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-PpApiKey=e42378e3-1d21-4bcb-99d4-e4e8216eee7f" />
+  </component>
 </project>

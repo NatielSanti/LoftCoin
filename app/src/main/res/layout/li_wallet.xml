@@ -49,9 +49,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:textAppearance="?attr/textAppearanceHeadline4"
-        app:layout_constraintBottom_toBottomOf="@+id/logo"
-        app:layout_constraintStart_toEndOf="@+id/logo"
-        app:layout_constraintTop_toTopOf="@+id/logo"
+        app:layout_constraintBottom_toBottomOf="@id/logo"
+        app:layout_constraintStart_toEndOf="@id/logo"
+        app:layout_constraintTop_toTopOf="@id/logo"
         tools:text="BTC" />
 
     <TextView
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:textAppearance="?attr/textAppearanceHeadline3"
-        app:layout_constraintBottom_toTopOf="@+id/balance2"
+        app:layout_constraintBottom_toTopOf="@id/balance2"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="123 BTC" />
 

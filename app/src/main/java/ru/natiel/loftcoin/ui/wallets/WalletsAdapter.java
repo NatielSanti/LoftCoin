@@ -1,5 +1,6 @@
 package ru.natiel.loftcoin.ui.wallets;
 
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,10 +8,17 @@ import ru.natiel.loftcoin.databinding.LiWalletBinding;
 
 class WalletsAdapter extends RecyclerView.Adapter<WalletsAdapter.ViewHolder> {
 
+    private LayoutInflater inflater;
+
+    @Override
+    public int getItemCount() {
+        return 10;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        return new ViewHolder(LiWalletBinding.inflate(inflater, parent, false));
     }
 
     @Override
@@ -19,19 +27,18 @@ class WalletsAdapter extends RecyclerView.Adapter<WalletsAdapter.ViewHolder> {
     }
 
     @Override
-    public int getItemCount() {
-        return 0;
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        inflater = LayoutInflater.from(recyclerView.getContext());
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        final LiWalletBinding binding;
 
         ViewHolder(@NonNull LiWalletBinding binding) {
             super(binding.getRoot());
-            this.binding = binding;
-//            binding.logo.setOutlineProvider(new CircleOutlineProvider());
-            binding.logo.setClipToOutline(true);
+            binding.getRoot().setClipToOutline(true);
         }
+
     }
 
 }

@@ -10,6 +10,6 @@ public interface CoinsRepo {
 
     @NonNull
     @WorkerThread
-    List<? extends Coin> listings(String currency) throws IOException;
+    List<? extends ru.natiel.loftcoin.data.Coin> listings(@NonNull String currency) throws IOException;
 
 }

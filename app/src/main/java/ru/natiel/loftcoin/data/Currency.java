@@ -7,7 +7,7 @@ import com.google.auto.value.AutoValue;
 public abstract class Currency {
 
     @NonNull
-    static ru.natiel.loftcoin.data.Currency create(String symbol, String code, String name) {
+    static Currency create(String symbol, String code, String name) {
         return new AutoValue_Currency(symbol, code, name);
     }
 

@@ -29,6 +29,7 @@
         <item name="textPositive">@color/weird_green</item>
 
         <item name="bottomNavigationStyle">@style/Widget.AppTheme.BottomNav</item>
+        <item name="materialAlertDialogTheme">@style/AppTheme.AlertDialog</item>
 
     </style>
 
@@ -75,6 +76,11 @@
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:paddingStart">64dp</item>
         <item name="android:paddingEnd">64dp</item>
+    </style>
+
+    <!-- https://material.io/develop/android/components/dialog/ -->
+    <style name="AppTheme.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorSurface">@color/dark_four</item>
     </style>
 
     <!-- Custom Attributes -->

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import ru.natiel.loftcoin.BaseComponent;
 import ru.natiel.loftcoin.R;
 import ru.natiel.loftcoin.databinding.FragmentRatesBinding;
@@ -24,6 +25,8 @@ public class RatesFragment extends Fragment {
     private RatesAdapter adapter;
 
     private RatesViewModel viewModel;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Inject
     public RatesFragment(BaseComponent baseComponent) {
@@ -42,8 +45,17 @@ public class RatesFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_rates, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_rates, container, false);
+        swipeRefreshLayout = view.findViewById(R.id.refresher);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadItems();
+            }
+        });
+        return view;
     }
 
     @Override
@@ -54,8 +66,7 @@ public class RatesFragment extends Fragment {
         binding.recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         binding.recycler.swapAdapter(adapter, false);
         binding.recycler.setHasFixedSize(true);
-        viewModel.coins().observe(getViewLifecycleOwner(), adapter::submitList);
-        viewModel.isRefreshing().observe(getViewLifecycleOwner(), binding.refresher::setRefreshing);
+        loadItems();
     }
 
     @Override
@@ -79,6 +90,11 @@ public class RatesFragment extends Fragment {
     public void onDestroyView() {
         binding.recycler.swapAdapter(null, false);
         super.onDestroyView();
+    }
+
+    private void loadItems() {
+        viewModel.coins().observe(getViewLifecycleOwner(), adapter::submitList);
+        viewModel.isRefreshing().observe(getViewLifecycleOwner(), binding.refresher::setRefreshing);
     }
 
 }

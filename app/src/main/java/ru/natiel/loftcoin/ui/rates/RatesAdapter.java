@@ -14,13 +14,14 @@ import ru.natiel.loftcoin.R;
 import ru.natiel.loftcoin.data.Coin;
 import ru.natiel.loftcoin.databinding.LiRateBinding;
 import ru.natiel.loftcoin.util.Formatter;
+import ru.natiel.loftcoin.util.ImageDownloader;
 import ru.natiel.loftcoin.util.OutlineCircle;
 import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
 import java.util.Objects;
 
-class RatesAdapter extends ListAdapter<Coin, RatesAdapter.ViewHolder> {
+public class RatesAdapter extends ListAdapter<Coin, RatesAdapter.ViewHolder> {
 
     private final Formatter<Double> priceFormatter;
 
@@ -68,9 +69,7 @@ class RatesAdapter extends ListAdapter<Coin, RatesAdapter.ViewHolder> {
         } else {
             holder.binding.change.setTextColor(colorNegative);
         }
-        Picasso.get()
-            .load(BuildConfig.IMG_ENDPOINT + coin.id() + ".png")
-            .into(holder.binding.logo);
+        ImageDownloader.load(coin.id(), holder.binding);
     }
 
     @Override
@@ -85,7 +84,7 @@ class RatesAdapter extends ListAdapter<Coin, RatesAdapter.ViewHolder> {
         colorPositive = v.data;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final LiRateBinding binding;
 

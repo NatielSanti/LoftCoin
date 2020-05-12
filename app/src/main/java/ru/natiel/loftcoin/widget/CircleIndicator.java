@@ -10,19 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CyrcleIndicator extends RecyclerView.ItemDecoration {
+public class CircleIndicator extends RecyclerView.ItemDecoration {
 
     private final Paint inactivePaint = new Paint();
+
     private final Paint activePaint = new Paint();
+
     private final float indicatorRadius;
 
-    public CyrcleIndicator(Context context) {
+    public CircleIndicator(@NonNull Context context) {
         final DisplayMetrics dm = context.getResources().getDisplayMetrics();
 
         indicatorRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, dm);
 
         inactivePaint.setStyle(Paint.Style.FILL);
-        inactivePaint.setColor(0x44ffffff);
+        inactivePaint.setColor(0x44ffffff); // White with alpha
         inactivePaint.setAntiAlias(true);
 
         activePaint.setStyle(Paint.Style.FILL);
@@ -42,13 +44,14 @@ public class CyrcleIndicator extends RecyclerView.ItemDecoration {
             if (lm instanceof LinearLayoutManager) {
                 currentIndicator = ((LinearLayoutManager) lm).findFirstCompletelyVisibleItemPosition();
             }
-            for (int i = 0; i < adapter.getItemCount(); i++) {
+            for (int i = 0; i < adapter.getItemCount(); ++i) {
                 drawIndicator(c, posX + 4 * indicatorRadius * i, posY, currentIndicator == i);
             }
         }
     }
 
-    private void drawIndicator(Canvas c, float x, float y, boolean active) {
+    private void drawIndicator(@NonNull Canvas c, float x, float y, boolean active) {
         c.drawCircle(x, y, indicatorRadius, active ? activePaint : inactivePaint);
     }
+
 }

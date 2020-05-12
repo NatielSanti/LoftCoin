@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceHeadline3"
-        app:layout_constraintEnd_toStartOf="@+id/timestamp"
+        app:layout_constraintEnd_toStartOf="@id/timestamp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="123$" />
@@ -24,7 +24,7 @@
         android:textAppearance="?attr/textAppearanceHeadline4"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amount1"
+        app:layout_constraintTop_toBottomOf="@id/amount1"
         tools:text="1.2%" />
 
     <TextView
@@ -33,9 +33,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceHeadline4"
         android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/amount1"
+        app:layout_constraintBaseline_toBaselineOf="@id/amount1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/amount1"
+        app:layout_constraintStart_toEndOf="@id/amount1"
         tools:text="@tools:sample/date/ddmmyy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

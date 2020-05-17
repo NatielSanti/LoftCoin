@@ -1,15 +1,16 @@
 package ru.natiel.loftcoin.data;
 
-import ru.natiel.loftcoin.BuildConfig;
+import android.content.Context;
+import androidx.room.Room;
 import com.squareup.moshi.Moshi;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
+import ru.natiel.loftcoin.BuildConfig;
 
 import javax.inject.Singleton;
 
@@ -17,37 +18,25 @@ import javax.inject.Singleton;
 public abstract class DataModule {
 
     @Provides
-    @Singleton
-    static OkHttpClient httpClient() {
-        final OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.addInterceptor(chain -> {
-            final Request request = chain.request();
-            return chain.proceed(request.newBuilder()
-                .addHeader(CmcApi.API_KEY, BuildConfig.API_KEY)
-                .build());
-        });
-        if (BuildConfig.DEBUG) {
-            final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
-            interceptor.redactHeader(CmcApi.API_KEY);
-            builder.addInterceptor(interceptor);
-        }
-        return builder.build();
-    }
-
-    @Provides
     static Moshi moshi() {
         final Moshi moshi = new Moshi.Builder().build();
         return moshi.newBuilder()
-            .add(ru.natiel.loftcoin.data.Coin.class, moshi.adapter(AutoValue_Coin.class))
-            .add(ru.natiel.loftcoin.data.Listings.class, moshi.adapter(AutoValue_Listings.class))
+            .add(Coin.class, moshi.adapter(AutoValue_CmcCoin.class))
+            .add(Listings.class, moshi.adapter(AutoValue_Listings.class))
             .build();
     }
 
     @Provides
     static Retrofit retrofit(OkHttpClient httpClient, Moshi moshi) {
         final Retrofit.Builder builder = new Retrofit.Builder();
-        builder.client(httpClient);
+        builder.client(httpClient.newBuilder()
+            .addInterceptor(chain -> {
+                final Request request = chain.request();
+                return chain.proceed(request.newBuilder()
+                    .addHeader(CmcApi.API_KEY, BuildConfig.API_KEY)
+                    .build());
+            })
+            .build());
         builder.baseUrl(BuildConfig.API_ENDPOINT);
         builder.addConverterFactory(MoshiConverterFactory.create(moshi));
         return builder.build();
@@ -58,10 +47,20 @@ public abstract class DataModule {
         return retrofit.create(CmcApi.class);
     }
 
-    @Binds
-    abstract ru.natiel.loftcoin.data.CoinsRepo coinsRepo(ru.natiel.loftcoin.data.CmcCoinsRepo impl);
+    @Provides
+    @Singleton
+    static LoftDatabase loftDatabase(Context context) {
+        if (BuildConfig.DEBUG) {
+            return Room.inMemoryDatabaseBuilder(context, LoftDatabase.class).build();
+        } else {
+            return Room.databaseBuilder(context, LoftDatabase.class, "loft.db").build();
+        }
+    }
 
     @Binds
-    abstract ru.natiel.loftcoin.data.CurrencyRepo currencyRepo(ru.natiel.loftcoin.data.CurrencyRepoImpl impl);
+    abstract CoinsRepo coinsRepo(CmcCoinsRepo impl);
+
+    @Binds
+    abstract CurrencyRepo currencyRepo(CurrencyRepoImpl impl);
 
 }

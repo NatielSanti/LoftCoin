@@ -9,14 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import ru.natiel.loftcoin.BuildConfig;
 import ru.natiel.loftcoin.R;
 import ru.natiel.loftcoin.data.Coin;
 import ru.natiel.loftcoin.databinding.LiRateBinding;
 import ru.natiel.loftcoin.util.Formatter;
 import ru.natiel.loftcoin.util.ImageDownloader;
 import ru.natiel.loftcoin.util.OutlineCircle;
-import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
 import java.util.Objects;
